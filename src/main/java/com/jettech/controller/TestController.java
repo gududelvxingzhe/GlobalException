@@ -3,19 +3,27 @@ package com.jettech.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jettech.common.Config;
 import com.jettech.common.WebResult;
 import com.jettech.exception.BaseException;
+import com.jettech.exception.UserNameNotMatchPasswordException;
 
 @RestController
 @RequestMapping(value = "/test")
 public class TestController {
+
+	
+	private static final Logger logger = LoggerFactory.getLogger(TestController.class);
 
 	@GetMapping("/data")
 	public Object getData() {
@@ -27,8 +35,13 @@ public class TestController {
     //occur exception
     @GetMapping("/exception/unknownException")
     public Object occurUnknownException() throws Exception {
-        int i = 1/0;
-        return null;
+    	throw new Exception();
+    }
+    
+    @GetMapping("/unknownException")
+    public Object unknownException(){
+    	logger.info("执行unknownException……");
+    	throw new UserNameNotMatchPasswordException();
     }
     
     //occur exception explicitly

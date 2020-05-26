@@ -19,7 +19,7 @@ import com.jettech.common.WebResult;
  * Copyright: Copyright (c) 2020
  *
  */
-@ControllerAdvice
+//@ControllerAdvice
 public class GlobalExceptionHandler {
 	
 	
@@ -33,6 +33,7 @@ public class GlobalExceptionHandler {
 		e.printStackTrace();
 		return WebResult.builder().status(e.getCode()).msg(e.getMessage()).build();
 	}
+	
 	
 	//其他未处理异常
 	@ResponseBody
